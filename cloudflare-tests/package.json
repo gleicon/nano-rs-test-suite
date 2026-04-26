@@ -1,0 +1,8 @@
+{
+  "name": "nano-rs-cloudflare-tests",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker compatibility tests",
+  "scripts": {
+    "test": "node test-runner.js"
+  }
+}

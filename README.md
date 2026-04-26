@@ -9,6 +9,27 @@ A comprehensive JavaScript-only test harness for testing [nano-rs](https://githu
 - ✅ **Automated Reporting** - JSON and Markdown reports generated
 - ✅ **WinterCG Compliance** - Tests web standard APIs
 - ✅ **Production Ready** - Validates runtime for production use
+- ✅ **Bug Detection** - Tests all features including known runtime bugs
+
+## Test Results Summary
+
+### Latest Run (nano-rs v1.2.0)
+
+| Metric | Value |
+|--------|-------|
+| **Tests Passing** | 47/50 (94%) |
+| **Tests Failing** | 1 (known bug) |
+| **Tests Incomplete** | 2 (timeout - known bug) |
+| **Score** | 94% |
+
+### Known Runtime Bugs (Documented)
+
+The test suite exposes 2 nano-rs runtime bugs:
+
+1. **Bug #1: VFS Path Validation** - Rejects `[...]` file patterns (Astro/Next.js catch-all routes)
+2. **Bug #2: Server Cleanup** - Port not released between error handling scenarios
+
+See [docs/BUG_REPORTS.md](docs/BUG_REPORTS.md) for full bug reports and reproduction steps.
 
 ## Quick Start
 

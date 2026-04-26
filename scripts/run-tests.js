@@ -292,7 +292,7 @@ export default {
       });
     }
     
-    const match = path.match(/^\/api\/items\/(\d+)$/);
+    const match = path.match(/^\\/api\\/items\\/(\\d+)$/);
     if (match) {
       const id = parseInt(match[1]);
       

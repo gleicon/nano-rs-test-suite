@@ -1,0 +1,17 @@
+{
+  "server": {
+    "host": "0.0.0.0",
+    "port": 9020
+  },
+  "apps": [
+    {
+      "hostname": "localhost",
+      "entrypoint": "/Users/gleicon/code/js/nano-rs-test-suite/scripts/test-apps/edge-case-test.js",
+      "limits": {
+        "workers": 2,
+        "memory_mb": 64,
+        "timeout_secs": 30
+      }
+    }
+  ]
+}

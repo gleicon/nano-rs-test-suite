@@ -1,0 +1,9 @@
+{
+  "timestamp": "2026-04-25T18:05:54.634Z",
+  "nano_version": "nano-rs 1.2.4",
+  "tests": {
+    "core": {
+      "error": "Command failed: npm test 2>&1"
+    }
+  }
+}

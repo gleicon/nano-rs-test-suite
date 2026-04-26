@@ -1,0 +1,18 @@
+/* Cloudflare Worker Asset */
+:root {
+  --primary: #f6821f;
+  --bg: #f5f5f5;
+}
+
+body {
+  background: var(--bg);
+  margin: 0;
+  padding: 20px;
+}
+
+.cf-badge {
+  background: var(--primary);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 3px;
+}

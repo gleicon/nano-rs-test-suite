@@ -122,8 +122,14 @@ async function waitForServer(port, timeout = 10000) {
 }
 
 // Helper: Start nano-rs server
-function startNanoServer(configPath, port) {
-  const proc = spawn(CONFIG.NANO_BINARY, ['run', '--config', configPath], {
+function startNanoServer(configPath, port, extraArgs = []) {
+  const args = ['run'];
+  if (configPath) {
+    args.push('--config', configPath);
+  }
+  args.push(...extraArgs);
+  
+  const proc = spawn(CONFIG.NANO_BINARY, args, {
     stdio: ['ignore', 'pipe', 'pipe'],
     detached: false
   });
@@ -136,20 +142,42 @@ function startNanoServer(configPath, port) {
   return { process: proc, stdout: () => stdout, stderr: () => stderr };
 }
 
-// Helper: Kill nano process
+// Helper: Kill nano process and wait for it to exit
 function stopNano(nano) {
   return new Promise((resolve) => {
     if (!nano || !nano.process) {
       resolve();
       return;
     }
-    nano.process.kill('SIGTERM');
-    setTimeout(() => {
-      try {
-        nano.process.kill('SIGKILL');
-      } catch (e) {}
+    
+    const proc = nano.process;
+    let exited = false;
+    
+    // Set up exit handler
+    proc.on('exit', () => {
+      exited = true;
       resolve();
-    }, 2000);
+    });
+    
+    // Send SIGTERM first
+    proc.kill('SIGTERM');
+    
+    // Wait for graceful exit with timeout
+    setTimeout(() => {
+      if (!exited) {
+        try {
+          proc.kill('SIGKILL');
+        } catch (e) {
+          // Process may have already exited
+        }
+        // Give it a moment to die after SIGKILL
+        setTimeout(() => {
+          if (!exited) {
+            resolve(); // Force resolve after timeout
+          }
+        }, 500);
+      }
+    }, 1000);
   });
 }
 
@@ -809,13 +837,56 @@ async function testSliver() {
     try {
       // Note: Creating sliver requires the app to be running via config
       // The sliver create command snapshots the isolate state
+      // Run from temp dir to avoid capturing entire test suite (791MB!)
+      const tempDir = path.join(CONFIG.TESTS_DIR, `sliver-temp-${Date.now()}`);
+      fs.mkdirSync(tempDir, { recursive: true });
+      
+      // Copy the test app to temp dir
+      const tempAppPath = path.join(tempDir, 'app.js');
+      fs.copyFileSync(testAppPath, tempAppPath);
+      
+      // Use absolute path to nano-rs binary since we're changing cwd
+      const nanoBinaryAbsolute = path.resolve(CONFIG.NANO_BINARY);
+      
+      // DEBUG: Log what we're doing
+      console.log(`  [DEBUG] Creating sliver from temp dir: ${tempDir}`);
+      console.log(`  [DEBUG] Nano binary: ${nanoBinaryAbsolute}`);
+      console.log(`  [DEBUG] Temp dir exists: ${fs.existsSync(tempDir)}`);
+      console.log(`  [DEBUG] Temp dir files: ${fs.readdirSync(tempDir)}`);
+      
       const output = execSync(
-        `${CONFIG.NANO_BINARY} sliver create localhost --name test-sliver --tag v1.0`,
-        { encoding: 'utf8', timeout: 30000 }
+        `${nanoBinaryAbsolute} sliver create localhost --name test-sliver --tag v1.0`,
+        { encoding: 'utf8', timeout: 30000, cwd: tempDir }
       );
-      assertContains(output.toLowerCase(), 'created' || 'success', 'Sliver should be created');
+      
+      console.log(`  [DEBUG] Sliver create output: ${output.substring(0, 100)}...`);
+      
+      // Move the sliver file to the expected location
+      const tempSliverFile = path.join(tempDir, 'test-sliver-v1.0.sliver');
+      const finalSliverFile = path.join(process.cwd(), 'test-sliver-v1.0.sliver');
+      
+      console.log(`  [DEBUG] Temp sliver file: ${tempSliverFile}`);
+      console.log(`  [DEBUG] Temp sliver exists: ${fs.existsSync(tempSliverFile)}`);
+      console.log(`  [DEBUG] Final sliver file: ${finalSliverFile}`);
+      
+      if (fs.existsSync(tempSliverFile)) {
+        fs.renameSync(tempSliverFile, finalSliverFile);
+        console.log(`  [DEBUG] Sliver file moved to: ${finalSliverFile}`);
+        console.log(`  [DEBUG] Final sliver exists after move: ${fs.existsSync(finalSliverFile)}`);
+      } else {
+        console.log(`  [DEBUG] WARNING: Temp sliver file not found!`);
+        console.log(`  [DEBUG] Files in temp dir: ${fs.readdirSync(tempDir)}`);
+      }
+      
+      // Cleanup temp dir
+      try {
+        fs.rmSync(tempDir, { recursive: true, force: true });
+      } catch (e) {}
+      
+      assertContains(output.toLowerCase(), 'created', 'Sliver should be created');
     } catch (e) {
-      // If sliver create fails (expected in some cases), we'll mark as skipped
+      // If sliver create fails, report it as a failure
+      console.log(`  [DEBUG] Sliver creation error: ${e.message}`);
       throw new Error(`Sliver creation failed: ${e.message}`);
     }
   }, 'sliver');
@@ -824,14 +895,36 @@ async function testSliver() {
   fs.unlinkSync(configPath);
   
   // Test running from sliver if one was created
-  const sliverFile = path.join(process.cwd(), 'test-sliver.sliver');
+  const sliverFile = path.join(process.cwd(), 'test-sliver-v1.0.sliver');
+  console.log(`  [DEBUG] Checking for sliver file at: ${sliverFile}`);
+  console.log(`  [DEBUG] Sliver file exists: ${fs.existsSync(sliverFile)}`);
   if (fs.existsSync(sliverFile)) {
+    const stats = fs.statSync(sliverFile);
+    console.log(`  [DEBUG] Sliver file size: ${stats.size} bytes`);
     await runTest('Sliver: Run server from sliver file', async () => {
-      const sliverNano = spawn(CONFIG.NANO_BINARY, ['run', '--sliver', sliverFile, '--workers', '2'], {
-        stdio: ['ignore', 'pipe', 'pipe']
-      });
+      // Use the startNanoServer helper with sliver argument
+      const sliverConfig = {
+        sliver: sliverFile,
+        workers: 2,
+        port: port
+      };
       
+      // Write a simple sliver run config
+      const sliverRunConfig = path.join(CONFIG.TESTS_DIR, `sliver-run-${Date.now()}.json`);
+      fs.writeFileSync(sliverRunConfig, JSON.stringify({
+        sliver: sliverFile,
+        workers: 2,
+        port: port
+      }));
+      
+      // Start nano with sliver - note: sliver run doesn't use --config, uses --sliver directly
+      console.log(`  [DEBUG] Starting sliver run with file: ${sliverFile}`);
+      console.log(`  [DEBUG] Port: ${port}`);
+      const sliverNano = startNanoServer(sliverRunConfig, port, ['--sliver', sliverFile, '--workers', '2']);
+      
+      console.log(`  [DEBUG] Waiting for server on port ${port}...`);
       await waitForServer(port, 10000);
+      console.log(`  [DEBUG] Server started!`);
       
       const response = await httpRequest({ 
         hostname: 'localhost', port, path: '/', method: 'GET',
@@ -839,8 +932,8 @@ async function testSliver() {
       });
       assertEquals(response.status, 200, 'Should respond from sliver');
       
-      sliverNano.kill('SIGTERM');
-      await new Promise(r => setTimeout(r, 1000));
+      await stopNano(sliverNano);
+      try { fs.unlinkSync(sliverRunConfig); } catch (e) {}
     }, 'sliver');
     
     // Cleanup

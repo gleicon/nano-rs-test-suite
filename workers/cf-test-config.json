@@ -1,0 +1,17 @@
+{
+  "apps": [
+    {
+      "hostname": "localhost",
+      "entrypoint": "/Users/gleicon/code/js/nano-rs-test-suite/workers/simple-cf-worker.js",
+      "limits": {
+        "workers": 2,
+        "memory_mb": 64,
+        "timeout_secs": 30
+      }
+    }
+  ],
+  "server": {
+    "host": "0.0.0.0",
+    "port": 8787
+  }
+}

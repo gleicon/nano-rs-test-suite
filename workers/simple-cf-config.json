@@ -1,0 +1,1 @@
+{"port":9050,"workers":2,"apps":[{"hostname":"localhost","entrypoint":"/Users/gleicon/code/js/nano-rs-test-suite/workers/simple-cf-worker.js"}]}

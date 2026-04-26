@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body { font-family: 'Courier New', monospace; background: #1e1e1e; color: #d4d4d4; padding: 20px; }
+.terminal { background: #0d0d0d; border-radius: 8px; padding: 20px; max-width: 800px; margin: 0 auto; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+.prompt { color: #4CAF50; }
+.command { color: #fff; }
+.output { color: #aed581; margin: 5px 0; }
+.info { color: #64b5f6; }
+.success { color: #81c784; }
+.error { color: #e57373; }
+.banner { 
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white; 
+  padding: 15px; 
+  border-radius: 5px; 
+  text-align: center; 
+  margin: 10px 0;
+  font-weight: bold;
+}
+.header { color: #ffd54f; font-weight: bold; margin-top: 15px; }
+</style>
+</head>
+<body>
+<div class="terminal">
+<span class="prompt">$</span> <span class="command">./bin/nano-rs --version</span>
+<div class="output">nano-rs 1.2.4</div>
+
+<span class="prompt">$</span> <span class="command">./bin/nano-rs run --config workers/cf-test-config.json</span>
+
+<div class="output info">{"event":"event src/main.rs:442","level":"INFO","message":"Starting NANO with config: workers/cf-test-config.json"}</div>
+<div class="output info">{"event":"event src/v8/platform.rs:63","level":"INFO","message":"V8 platform initialized successfully"}</div>
+
+<div class="banner">
+╔════════════════════════════════════════════════════════════╗<br>
+║&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NANO Edge Runtime - Config Mode (Multi-App)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;║<br>
+╚════════════════════════════════════════════════════════════╝
+</div>
+
+<div class="output">
+  Config:     workers/cf-test-config.json<br>
+  Address:    http://0.0.0.0:8787<br>
+  Apps:       1<br><br>
+  - localhost (entrypoint)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Workers: 2, Memory: 64MB, Timeout: 30s<br><br>
+  Ready to accept connections...<br>
+  Press Ctrl+C to stop
+</div>
+
+<div class="output success">
+{"event":"event src/http/server.rs:776","level":"INFO","message":"Config-mode HTTP server listening on 0.0.0.0:8787"}
+</div>
+
+<div class="output info">
+{"event":"event src/worker/queue.rs:254","level":"INFO","message":"Created WorkerPool for localhost with 4 workers (256 capacity each)"}
+</div>
+
+<div class="header">✓ Worker Initialization:</div>
+<div class="output success">
+{"event":"event src/worker/queue.rs:216","level":"INFO","message":"Worker 0 initialized with V8 context and runtime APIs"}<br>
+{"event":"event src/worker/queue.rs:216","level":"INFO","message":"Worker 1 initialized with V8 context and runtime APIs"}<br>
+{"event":"event src/worker/queue.rs:216","level":"INFO","message":"Worker 2 initialized with V8 context and runtime APIs"}<br>
+{"event":"event src/worker/queue.rs:216","level":"INFO","message":"Worker 3 initialized with V8 context and runtime APIs"}
+</div>
+
+<div class="header">✓ Runtime APIs Ready:</div>
+<div class="output success">
+{"event":"event src/runtime/fetch.rs:123","level":"INFO","message":"Fetch state initialized successfully"}
+</div>
+
+<div style="margin-top: 20px; padding: 10px; background: #263238; border-radius: 5px;">
+<span style="color: #81c784;">✓ Server ready in ~100ms</span><br>
+<span style="color: #81c784;">✓ 4 V8 isolates initialized</span><br>
+<span style="color: #81c784;">✓ WinterCG APIs available</span><br>
+<span style="color: #64b5f6;">→ Ready for Cloudflare Workers</span>
+</div>
+</div>
+</body>
+</html>
