@@ -83,6 +83,9 @@ reports/report-*.json
 reports/report-*.md
 !reports/latest-report.md
 
+# Archive directory (old reports)
+.archive/
+
 # -----------------------------------------------------------------------------
 # OS-SPECIFIC FILES
 # -----------------------------------------------------------------------------
