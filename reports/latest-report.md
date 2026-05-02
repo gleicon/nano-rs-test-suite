@@ -1,8 +1,8 @@
 # NANO-RS Blackbox Test Report
 
-**Generated:** 2026-04-26T01:28:02.259Z  
-**NANO Version:** nano-rs 1.2.4  
-**Test Duration:** 14891ms
+**Generated:** 2026-05-02T23:37:01.505Z  
+**NANO Version:** nano-rs 1.4.0  
+**Test Duration:** 14861ms
 
 ## Summary
 

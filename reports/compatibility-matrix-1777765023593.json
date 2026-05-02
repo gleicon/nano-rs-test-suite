@@ -1,0 +1,292 @@
+{
+  "timestamp": "2026-05-02T23:37:01.565Z",
+  "nanoVersion": null,
+  "tests": [
+    {
+      "category": "IMPLEMENTED",
+      "api": "console",
+      "name": "log",
+      "expect": "undefined",
+      "type": "implemented",
+      "status": 200,
+      "actual": "undefined",
+      "passed": true
+    },
+    {
+      "category": "IMPLEMENTED",
+      "api": "console",
+      "name": "error",
+      "expect": "undefined",
+      "type": "implemented",
+      "status": 200,
+      "actual": "undefined",
+      "passed": true
+    },
+    {
+      "category": "IMPLEMENTED",
+      "api": "console",
+      "name": "warn",
+      "expect": "undefined",
+      "type": "implemented",
+      "status": 200,
+      "actual": "undefined",
+      "passed": true
+    },
+    {
+      "category": "IMPLEMENTED",
+      "api": "Buffer",
+      "name": "from",
+      "expect": "test",
+      "type": "implemented",
+      "status": 200,
+      "actual": "test",
+      "passed": true
+    },
+    {
+      "category": "IMPLEMENTED",
+      "api": "Buffer",
+      "name": "alloc",
+      "expect": "10",
+      "type": "implemented",
+      "status": 200,
+      "actual": "10",
+      "passed": true
+    },
+    {
+      "category": "IMPLEMENTED",
+      "api": "URL",
+      "name": "pathname",
+      "expect": "/path",
+      "type": "implemented",
+      "status": 200,
+      "actual": "/path",
+      "passed": true
+    },
+    {
+      "category": "IMPLEMENTED",
+      "api": "URL",
+      "name": "toString",
+      "expect": "http://example.com/",
+      "type": "implemented",
+      "status": 200,
+      "actual": "http://example.com/",
+      "passed": true
+    },
+    {
+      "category": "IMPLEMENTED",
+      "api": "URLSearchParams",
+      "name": "get",
+      "expect": "1",
+      "type": "implemented",
+      "status": 200,
+      "actual": "1",
+      "passed": true
+    },
+    {
+      "category": "IMPLEMENTED",
+      "api": "URLSearchParams",
+      "name": "has",
+      "expect": "true",
+      "type": "implemented",
+      "status": 200,
+      "actual": "true",
+      "passed": true
+    },
+    {
+      "category": "IMPLEMENTED",
+      "api": "TextEncoder",
+      "name": "encode",
+      "expect": "true",
+      "type": "implemented",
+      "status": 200,
+      "actual": "true",
+      "passed": true
+    },
+    {
+      "category": "IMPLEMENTED",
+      "api": "TextDecoder",
+      "name": "decode",
+      "expect": "test",
+      "type": "implemented",
+      "status": 200,
+      "actual": "test",
+      "passed": true
+    },
+    {
+      "category": "IMPLEMENTED",
+      "api": "fetch",
+      "name": "typeof",
+      "expect": "function",
+      "type": "implemented",
+      "status": 200,
+      "actual": "function",
+      "passed": true
+    },
+    {
+      "category": "IMPLEMENTED",
+      "api": "fetch",
+      "name": "Request",
+      "expect": "function",
+      "type": "implemented",
+      "status": 200,
+      "actual": "function",
+      "passed": true
+    },
+    {
+      "category": "IMPLEMENTED",
+      "api": "fetch",
+      "name": "Response",
+      "expect": "function",
+      "type": "implemented",
+      "status": 200,
+      "actual": "function",
+      "passed": true
+    },
+    {
+      "category": "IMPLEMENTED",
+      "api": "fetch",
+      "name": "Headers",
+      "expect": "function",
+      "type": "implemented",
+      "status": 200,
+      "actual": "function",
+      "passed": true
+    },
+    {
+      "category": "PARTIAL",
+      "api": "crypto.subtle",
+      "name": "digest",
+      "expect": "function",
+      "type": "partial",
+      "status": 200,
+      "actual": "function",
+      "passed": true
+    },
+    {
+      "category": "PARTIAL",
+      "api": "crypto.subtle",
+      "name": "generateKey",
+      "expect": "function",
+      "type": "partial",
+      "status": 200,
+      "actual": "function",
+      "passed": true
+    },
+    {
+      "category": "PARTIAL",
+      "api": "crypto",
+      "name": "getRandomValues",
+      "expect": "8",
+      "type": "partial",
+      "status": 200,
+      "actual": "8",
+      "passed": true
+    },
+    {
+      "category": "PARTIAL",
+      "api": "timers",
+      "name": "setTimeout",
+      "expect": "function",
+      "type": "partial",
+      "status": 200,
+      "actual": "function",
+      "passed": true
+    },
+    {
+      "category": "PARTIAL",
+      "api": "timers",
+      "name": "clearTimeout",
+      "expect": "function",
+      "type": "partial",
+      "status": 200,
+      "actual": "function",
+      "passed": true
+    },
+    {
+      "category": "PARTIAL",
+      "api": "timers",
+      "name": "setInterval",
+      "expect": "function",
+      "type": "partial",
+      "status": 200,
+      "actual": "function",
+      "passed": true
+    },
+    {
+      "category": "NOT_IMPLEMENTED",
+      "api": "fs",
+      "name": "exists",
+      "expect": "function",
+      "type": "not_implemented",
+      "note": "Available via fs polyfill",
+      "status": 200,
+      "actual": "function",
+      "passed": true
+    },
+    {
+      "category": "NOT_IMPLEMENTED",
+      "api": "path",
+      "name": "join",
+      "expect": "ERROR",
+      "type": "not_implemented",
+      "note": "Not available",
+      "status": 500,
+      "actual": "ERROR: Module 'path' not found",
+      "passed": true
+    },
+    {
+      "category": "WONT_IMPLEMENT",
+      "api": "http",
+      "name": "createServer",
+      "expect": "ERROR",
+      "type": "wont_implement",
+      "note": "Use WinterCG fetch instead",
+      "status": 500,
+      "actual": "ERROR: Module 'http' not found",
+      "passed": true
+    },
+    {
+      "category": "WONT_IMPLEMENT",
+      "api": "net",
+      "name": "createServer",
+      "expect": "ERROR",
+      "type": "wont_implement",
+      "note": "Raw sockets not supported",
+      "status": 500,
+      "actual": "ERROR: Module 'net' not found",
+      "passed": true
+    },
+    {
+      "category": "WONT_IMPLEMENT",
+      "api": "process",
+      "name": "env",
+      "expect": "ERROR",
+      "type": "wont_implement",
+      "note": "No process global in WinterCG",
+      "status": 500,
+      "actual": "ERROR: process is not defined",
+      "passed": true
+    }
+  ],
+  "summary": {
+    "total": 26,
+    "byCategory": {
+      "IMPLEMENTED": {
+        "total": 15,
+        "passed": 15
+      },
+      "PARTIAL": {
+        "total": 6,
+        "passed": 6
+      },
+      "NOT_IMPLEMENTED": {
+        "total": 2,
+        "passed": 2
+      },
+      "WONT_IMPLEMENT": {
+        "total": 3,
+        "passed": 3
+      }
+    }
+  }
+}
