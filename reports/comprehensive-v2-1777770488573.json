@@ -1,0 +1,76 @@
+{
+  "timestamp": "2026-05-03T01-06-35-913Z",
+  "binary": "/Users/gleicon/code/js/nano-rs-test-suite/bin/nano-rs",
+  "version": "2.0",
+  "summary": {
+    "total": 45,
+    "passed": 45,
+    "failed": 0,
+    "score": 100
+  },
+  "results": [
+    {
+      "name": "Core Blackbox Tests",
+      "passed": 0,
+      "failed": 0,
+      "total": 0,
+      "score": 0
+    },
+    {
+      "name": "API Compatibility Matrix",
+      "passed": 0,
+      "failed": 0,
+      "total": 0,
+      "score": 0
+    },
+    {
+      "name": "Edge Case Tests",
+      "passed": 10,
+      "failed": 0,
+      "total": 10,
+      "score": 100
+    },
+    {
+      "name": "Performance Tests",
+      "passed": 4,
+      "failed": 0,
+      "total": 4,
+      "score": 100
+    },
+    {
+      "name": "Cloudflare Worker Tests",
+      "passed": 7,
+      "failed": 0,
+      "total": 7,
+      "score": 100
+    },
+    {
+      "name": "WASM-JS Parity Tests",
+      "passed": 4,
+      "failed": 0,
+      "total": 4,
+      "score": 100
+    },
+    {
+      "name": "CPU Time Limit Tests",
+      "passed": 4,
+      "failed": 0,
+      "total": 4,
+      "score": 100
+    },
+    {
+      "name": "Adversarial Security Tests",
+      "passed": 9,
+      "failed": 0,
+      "total": 9,
+      "score": 100
+    },
+    {
+      "name": "VFS Tests",
+      "passed": 7,
+      "failed": 0,
+      "total": 7,
+      "score": 100
+    }
+  ]
+}

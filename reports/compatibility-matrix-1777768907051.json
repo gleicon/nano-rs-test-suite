@@ -1,0 +1,526 @@
+{
+  "timestamp": "2026-05-03T00:40:33.368Z",
+  "nanoVersion": "nano-rs 1.4.0",
+  "categories": {
+    "implemented": {
+      "name": "implemented",
+      "apis": [
+        {
+          "name": "console",
+          "tests": [
+            {
+              "name": "console.log",
+              "passed": true,
+              "expected": "undefined",
+              "actual": "undefined"
+            },
+            {
+              "name": "console.error",
+              "passed": true,
+              "expected": "undefined",
+              "actual": "undefined"
+            },
+            {
+              "name": "console.warn",
+              "passed": true,
+              "expected": "undefined",
+              "actual": "undefined"
+            },
+            {
+              "name": "console.info",
+              "passed": false,
+              "expected": "undefined",
+              "actual": "ERROR: console.info is not a function",
+              "error": "HTTP 500"
+            },
+            {
+              "name": "console.debug",
+              "passed": false,
+              "expected": "undefined",
+              "actual": "ERROR: console.debug is not a function",
+              "error": "HTTP 500"
+            },
+            {
+              "name": "console.table",
+              "passed": false,
+              "expected": "undefined",
+              "actual": "ERROR: console.table is not a function",
+              "error": "HTTP 500"
+            }
+          ]
+        },
+        {
+          "name": "Buffer",
+          "tests": [
+            {
+              "name": "Buffer.from",
+              "passed": false,
+              "expected": "\"test\"",
+              "actual": "test"
+            },
+            {
+              "name": "Buffer.alloc",
+              "passed": true,
+              "expected": "10",
+              "actual": "10"
+            },
+            {
+              "name": "Buffer.concat",
+              "passed": false,
+              "expected": "\"ab\"",
+              "actual": "ERROR: Buffer.concat is not a function",
+              "error": "HTTP 500"
+            },
+            {
+              "name": "Buffer.isBuffer",
+              "passed": false,
+              "expected": "true",
+              "actual": "ERROR: Buffer.isBuffer is not a function",
+              "error": "HTTP 500"
+            },
+            {
+              "name": "Buffer.byteLength",
+              "passed": false,
+              "expected": "4",
+              "actual": "ERROR: Buffer.byteLength is not a function",
+              "error": "HTTP 500"
+            }
+          ]
+        },
+        {
+          "name": "URL",
+          "tests": [
+            {
+              "name": "new URL",
+              "passed": false,
+              "expected": "\"/path\"",
+              "actual": "Not found",
+              "error": "HTTP 404"
+            },
+            {
+              "name": "URL.searchParams",
+              "passed": false,
+              "expected": "\"1\"",
+              "actual": "1"
+            },
+            {
+              "name": "URL.toString",
+              "passed": false,
+              "expected": "\"http://example.com/\"",
+              "actual": "http://example.com/"
+            }
+          ]
+        },
+        {
+          "name": "URLSearchParams",
+          "tests": [
+            {
+              "name": "append",
+              "passed": false,
+              "expected": "\"1\"",
+              "actual": "Internal Server Error",
+              "error": "HTTP 500"
+            },
+            {
+              "name": "get",
+              "passed": false,
+              "expected": "\"1\"",
+              "actual": "Internal Server Error",
+              "error": "HTTP 500"
+            },
+            {
+              "name": "has",
+              "passed": false,
+              "expected": "true",
+              "actual": "Internal Server Error",
+              "error": "HTTP 500"
+            },
+            {
+              "name": "delete",
+              "passed": false,
+              "expected": "false",
+              "actual": "Internal Server Error",
+              "error": "HTTP 500"
+            }
+          ]
+        },
+        {
+          "name": "TextEncoder",
+          "tests": [
+            {
+              "name": "encode",
+              "passed": true,
+              "expected": "true",
+              "actual": "true"
+            },
+            {
+              "name": "encoding",
+              "passed": false,
+              "expected": "\"utf-8\"",
+              "actual": "undefined"
+            }
+          ]
+        },
+        {
+          "name": "TextDecoder",
+          "tests": [
+            {
+              "name": "decode",
+              "passed": false,
+              "expected": "\"test\"",
+              "actual": "test"
+            },
+            {
+              "name": "encoding",
+              "passed": false,
+              "expected": "\"utf-8\"",
+              "actual": "undefined"
+            }
+          ]
+        },
+        {
+          "name": "fetch",
+          "tests": [
+            {
+              "name": "typeof fetch",
+              "passed": false,
+              "expected": "\"function\"",
+              "actual": "Not found",
+              "error": "HTTP 404"
+            },
+            {
+              "name": "Request",
+              "passed": false,
+              "expected": "\"function\"",
+              "actual": "function"
+            },
+            {
+              "name": "Response",
+              "passed": false,
+              "expected": "\"function\"",
+              "actual": "function"
+            },
+            {
+              "name": "Headers",
+              "passed": false,
+              "expected": "\"function\"",
+              "actual": "function"
+            }
+          ]
+        }
+      ]
+    },
+    "partial": {
+      "name": "partial",
+      "apis": [
+        {
+          "name": "crypto.subtle",
+          "tests": [
+            {
+              "name": "crypto.subtle.digest",
+              "passed": false,
+              "expected": "\"function\"",
+              "actual": "function"
+            },
+            {
+              "name": "crypto.subtle.generateKey",
+              "passed": false,
+              "expected": "\"function\"",
+              "actual": "function"
+            },
+            {
+              "name": "crypto.subtle.encrypt",
+              "passed": false,
+              "expected": "\"function\"",
+              "actual": "function"
+            },
+            {
+              "name": "crypto.subtle.decrypt",
+              "passed": false,
+              "expected": "\"function\"",
+              "actual": "function"
+            },
+            {
+              "name": "crypto.getRandomValues",
+              "passed": true,
+              "expected": "8",
+              "actual": "8"
+            }
+          ]
+        },
+        {
+          "name": "timers",
+          "tests": [
+            {
+              "name": "setTimeout",
+              "passed": false,
+              "expected": "\"function\"",
+              "actual": "function"
+            },
+            {
+              "name": "clearTimeout",
+              "passed": false,
+              "expected": "\"function\"",
+              "actual": "function"
+            },
+            {
+              "name": "setInterval",
+              "passed": false,
+              "expected": "\"function\"",
+              "actual": "function"
+            },
+            {
+              "name": "clearInterval",
+              "passed": false,
+              "expected": "\"function\"",
+              "actual": "function"
+            }
+          ]
+        },
+        {
+          "name": "process",
+          "tests": [
+            {
+              "name": "process.env",
+              "passed": false,
+              "expected": "\"object\"",
+              "actual": "ERROR: process is not defined",
+              "error": "HTTP 500"
+            },
+            {
+              "name": "process.version",
+              "passed": false,
+              "expected": "\"string\"",
+              "actual": "ERROR: process is not defined",
+              "error": "HTTP 500"
+            }
+          ]
+        }
+      ]
+    },
+    "not_implemented": {
+      "name": "not_implemented",
+      "apis": [
+        {
+          "name": "fs",
+          "tests": [
+            {
+              "name": "fs.exists",
+              "passed": false,
+              "expected": "\"function\"",
+              "actual": "function",
+              "note": "Available via Nano.fs polyfill"
+            },
+            {
+              "name": "fs.readFile",
+              "passed": false,
+              "expected": "\"function\"",
+              "actual": "function",
+              "note": "Available via Nano.fs polyfill"
+            },
+            {
+              "name": "fs.writeFile",
+              "passed": false,
+              "expected": "\"function\"",
+              "actual": "function",
+              "note": "Available via Nano.fs polyfill"
+            }
+          ]
+        },
+        {
+          "name": "path",
+          "tests": [
+            {
+              "name": "path.join",
+              "passed": false,
+              "expected": "\"undefined\"",
+              "actual": "ERROR: Module 'path' not found",
+              "error": "HTTP 500",
+              "note": "Not available"
+            },
+            {
+              "name": "path.resolve",
+              "passed": false,
+              "expected": "\"undefined\"",
+              "actual": "ERROR: Module 'path' not found",
+              "error": "HTTP 500",
+              "note": "Not available"
+            }
+          ]
+        },
+        {
+          "name": "stream",
+          "tests": [
+            {
+              "name": "ReadableStream",
+              "passed": false,
+              "expected": "\"undefined\"",
+              "actual": "function",
+              "note": "WinterCG streams only"
+            },
+            {
+              "name": "WritableStream",
+              "passed": false,
+              "expected": "\"undefined\"",
+              "actual": "function",
+              "note": "WinterCG streams only"
+            }
+          ]
+        }
+      ]
+    },
+    "wont_implement": {
+      "name": "wont_implement",
+      "apis": [
+        {
+          "name": "http",
+          "tests": [
+            {
+              "name": "http.createServer",
+              "passed": false,
+              "expected": "\"undefined\"",
+              "actual": "ERROR: Module 'http' not found",
+              "error": "HTTP 500",
+              "note": "Use WinterCG fetch instead"
+            },
+            {
+              "name": "http.request",
+              "passed": false,
+              "expected": "\"undefined\"",
+              "actual": "ERROR: Module 'http' not found",
+              "error": "HTTP 500",
+              "note": "Use fetch() instead"
+            }
+          ]
+        },
+        {
+          "name": "net",
+          "tests": [
+            {
+              "name": "net.createServer",
+              "passed": false,
+              "expected": "\"undefined\"",
+              "actual": "ERROR: Module 'net' not found",
+              "error": "HTTP 500",
+              "note": "Raw sockets not supported"
+            },
+            {
+              "name": "net.Socket",
+              "passed": false,
+              "expected": "\"undefined\"",
+              "actual": "ERROR: Module 'net' not found",
+              "error": "HTTP 500",
+              "note": "Raw sockets not supported"
+            }
+          ]
+        },
+        {
+          "name": "dgram",
+          "tests": [
+            {
+              "name": "dgram.createSocket",
+              "passed": false,
+              "expected": "\"undefined\"",
+              "actual": "ERROR: Module 'dgram' not found",
+              "error": "HTTP 500",
+              "note": "UDP not supported"
+            }
+          ]
+        },
+        {
+          "name": "child_process",
+          "tests": [
+            {
+              "name": "child_process.spawn",
+              "passed": false,
+              "expected": "\"undefined\"",
+              "actual": "ERROR: Module 'child_process' not found",
+              "error": "HTTP 500",
+              "note": "Process spawning not supported"
+            }
+          ]
+        },
+        {
+          "name": "cluster",
+          "tests": [
+            {
+              "name": "cluster.fork",
+              "passed": false,
+              "expected": "\"undefined\"",
+              "actual": "ERROR: Module 'cluster' not found",
+              "error": "HTTP 500",
+              "note": "Multi-process not supported"
+            }
+          ]
+        },
+        {
+          "name": "worker_threads",
+          "tests": [
+            {
+              "name": "new Worker",
+              "passed": false,
+              "expected": "\"undefined\"",
+              "actual": "Not found",
+              "error": "HTTP 404",
+              "note": "Workers not supported"
+            }
+          ]
+        },
+        {
+          "name": "vm",
+          "tests": [
+            {
+              "name": "vm.runInNewContext",
+              "passed": false,
+              "expected": "\"undefined\"",
+              "actual": "ERROR: Module 'vm' not found",
+              "error": "HTTP 500",
+              "note": "VM module not supported"
+            }
+          ]
+        },
+        {
+          "name": "v8",
+          "tests": [
+            {
+              "name": "v8.getHeapStatistics",
+              "passed": false,
+              "expected": "\"undefined\"",
+              "actual": "ERROR: Module 'v8' not found",
+              "error": "HTTP 500",
+              "note": "V8 internals not exposed"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "summary": {
+    "total": 54,
+    "passed": 6,
+    "failed": 0,
+    "skipped": 0,
+    "byCategory": {
+      "implemented": {
+        "passed": 5,
+        "total": 26,
+        "percentage": 19
+      },
+      "partial": {
+        "passed": 1,
+        "total": 11,
+        "percentage": 9
+      },
+      "not_implemented": {
+        "passed": 0,
+        "total": 7,
+        "percentage": 0
+      },
+      "wont_implement": {
+        "passed": 0,
+        "total": 10,
+        "percentage": 0
+      }
+    }
+  }
+}
