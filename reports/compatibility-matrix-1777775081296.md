@@ -1,6 +1,6 @@
 # nano-rs Node.js API Compatibility Matrix
 
-**Generated:** 2026-05-03T02:54:42.662Z  
+**Generated:** 2026-05-03T02:24:39.247Z  
 **nano-rs Version:** 1.2.4
 
 ## Summary
